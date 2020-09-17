@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-02-06T10:52:31Z" product-name="hevlocation">
+		<header/>
+		<body>
+			<trans-unit id="header.description">
+				<source>header</source>
+			</trans-unit>
+			<trans-unit id="location.description">
+				<source>location</source>
+			</trans-unit>
+			<trans-unit id="target.description">
+				<source>target</source>
+			</trans-unit>
+			<trans-unit id="display_section_name.description">
+				<source>displaySectionName</source>
+			</trans-unit>
+			<trans-unit id="bodytext.description">
+				<source>bodytext</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

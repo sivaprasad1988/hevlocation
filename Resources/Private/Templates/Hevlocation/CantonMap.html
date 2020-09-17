@@ -1,0 +1,113 @@
+<f:layout name="Default" />
+<f:section name="main">
+  <link
+    rel="stylesheet"
+    href="/typo3conf/ext/hevlocation/Resources/Public/Css/leaflet.css"
+  />
+
+  <style>
+    #map {
+      width: 99%;
+      height: 35em;
+    }
+
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: white;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+    .info h4 {
+      margin: 0 0 5px;
+      color: #777;
+    }
+
+    .legend {
+      text-align: left;
+      line-height: 18px;
+      color: #555;
+    }
+    .legend i {
+      width: 18px;
+      height: 18px;
+      float: left;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+  </style>
+
+  <div id="map"></div>
+
+  <script type="text/javascript">
+    function getLink(d) {
+      return d == "Z&uuml;rich"
+        ? '<f:uri.action  absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.zh}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Bern"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.be}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Uri"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ur}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Glarus"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.gl}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Luzern"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.lu}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Jura"
+        ? (src = "index.php?id=8222")
+        : d == "Schwyz"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.sz}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Obwalden"
+        ? '<f:uri.action  absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ow}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Nidwalden"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.nw}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Zug"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.zg}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Fribourg"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.fr}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Basel-Stadt"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.bs}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Basel-Landschaft"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.bl}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Solothurn"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.so}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Appenzell Ausserrhoden"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ar}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Appenzell Innerrhoden"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ai}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "St. Gallen"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.sg}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Graub&uuml;nden"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.gr}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Aargau"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ag}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Thurgau"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.tg}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Ticino"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.ti}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Vaud"
+        ? (src = "index.php?id=8222")
+        : d == "Valais"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.vs}" controller="HevpersonsController" pluginName="pi1" />'
+        : d == "Neuch&acirc;tel"
+        ? (src = "index.php?id=8222")
+        : d == "Gen&egrafe;ve"
+        ? (src = "index.php?id=8222")
+        : d == "Schaffhausen"
+        ? '<f:uri.action absolute="1" action="consultantslistAction" extensionName="hevpersons"  pageUid="{target}"  arguments="{KT:cantons.sh}" controller="HevpersonsController" pluginName="pi1" />'
+        : (src = "index.php?id=8222");
+    }
+  </script>
+
+  <script
+    type="text/javascript"
+    src="/typo3conf/ext/hevlocation/Resources/Public/JavaScript/leaflet.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="/typo3conf/ext/hevlocation/Resources/Public/JavaScript/kantone_edit.js"
+  ></script>
+  <script
+    type="text/javascript"
+    src="/typo3conf/ext/hevlocation/Resources/Public/JavaScript/CantonMap.js"
+  ></script>
+</f:section>

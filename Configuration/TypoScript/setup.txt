@@ -1,0 +1,72 @@
+
+plugin.tx_hevlocation {
+	view {
+		templateRootPath = {$plugin.tx_hevlocation.view.templateRootPath}
+		partialRootPath = {$plugin.tx_hevlocation.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_hevlocation.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_hevlocation.persistence.storagePid}
+	}
+	features {
+		# uncomment the following line to enable the new Property Mapper.
+		# rewrittenPropertyMapper = 1
+	}
+	settings {
+		target = {$plugin.tx_hevlocation.target}
+	}	
+}
+
+
+
+
+plugin.tx_hevlocation._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-hevlocation table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-hevlocation table th {
+		font-weight:bold;
+	}
+
+	.tx-hevlocation table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+
+)
+
+page.includeJSFooter {
+  hevlocation  = EXT:hevlocation/Resources/Public/JavaScript/autocomplete_settlement.js
+  hevlocation.type = text/javascript
+  
+  #hevlocation  = EXT:hevlocation/Resources/Public/JavaScript/CantonMap.js
+  #hevlocation.type = text/javascript
+  
+  #hevlocation  = EXT:hevlocation/Resources/Public/JavaScript/kantone_edit.js
+  #hevlocation.type = text/javascript
+  
+}
+
+page.includeCSS {
+  jquery-uicss = EXT:hev_powermail/Resources/Public/Styles/jquery-ui.css
+  jquery-uicss.media = screen
+}

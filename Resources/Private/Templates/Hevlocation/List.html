@@ -1,0 +1,65 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<h1>Listing for Hevlocation</h1>
+
+
+
+	
+
+
+
+<f:flashMessages renderMode="div" />
+
+
+
+<f:for each="{hevlocations}" as="hevlocation">
+
+	<h4> {hevlocation.bodytext}</h4>		
+
+<f:format.html>
+<link {target}>Linktext</link>
+</f:format.html>
+
+
+			
+	<form action="<f:uri.page pageUid='{target}' />" method="post">
+		<fieldset>	
+			<div>name 		<input type="text"  id="settlement"  class="settlement" />      </div>
+			<div><input type="text" class="section" />	</div>				
+			<div>	<input type="submit" class="go" value="{buttontext}" />	</div>	
+		</fieldset>
+	</form>
+<script type="text/javascript">
+	$.getJSON("/typo3conf/ext/hev_geosearch/templates/section_info.php", function( data ) {
+		$("#settlement").autocomplete({
+			source: data
+		});
+		  jQuery("#settlement").autocomplete({
+			  source: data,
+			  select: function (event, ui) {
+			        event.preventDefault();
+			        this.value = ui.item.label;
+			        $('.section').val(ui.item.value);
+			  }	
+			});
+
+		});
+</script>	
+	
+</f:for>
+
+
+</f:section>

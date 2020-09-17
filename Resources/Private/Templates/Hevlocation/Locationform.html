@@ -1,0 +1,33 @@
+
+<f:layout name="Default" />
+
+
+
+<f:section name="main">
+	<f:if condition="{ort}"><div>Letzte Suche: {ort}<br /></div></f:if>
+	<f:comment><f:uri.action action="consultantslist" extensionName="hevpersons" controller="Hevpersons" pluginName="pi1" pageUid="{target}" arguments="{SIDi:sid}"/></f:comment>		
+	<form class="hevlocation" action="<f:uri.action action="consultantslist" extensionName="hevpersons" controller="Hevpersons" pluginName="pi1" pageUid="{target}" />" method="post">
+		<fieldset>	
+			<div><label class="locationform">Ort / PLZ: </label><input type="text"  id="settlement" name="settlement"  class="settlement" value="{ort}" />      </div>
+			
+						
+			<div class="sectionnamediv fyi"> </div>
+			
+			<div><input type="hidden" 	class="section" 		name="SID" 				 	value="{sid}"/>	</div>
+			<div><input type="hidden" 	class="section" 		name="tx_hevpersons[SID]"  	value="{sid}"/>	</div>
+      <f:if condition="{contentId}">			
+        <div><input type="hidden" 	class="section" 		id="location"  	value="{contentId}"/>	</div>
+      </f:if>				
+			<div class="btn-more">
+				<div class="btn-wrap">
+					<span class="btn"><input type="submit" class="btn go" value="{buttontext}" /></span>	
+				</div>
+			</div>	
+		</fieldset>
+	</form>
+
+
+
+
+
+</f:section>
