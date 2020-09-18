@@ -6,7 +6,7 @@ namespace Eoss\Hevlocation\Utility;
  *
  *  Copyright notice
  *
- *  (c) 2015 Joachim Rinck <jr@eoss.ch>, eoss
+ *  (c) 2015 Sivaprasad S <siva@eoss.ch>, eoss
  *
  *  All rights reserved
  *
@@ -46,12 +46,7 @@ class Autocomplete
     */
     public function searchAction(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $parameters = array();
-        /*
-        $this->getDatabaseConnection()->exec_SELECTgetRows('sm.name as settlementname,sm.postal as settlementpostal,sm.sid as sid,
-                            sec.companyname as sectionname ', 'tx_hevsectioninfo_settlement sm left join tx_hevsectioninfo_section sec on sm.section=sec.uid', ''
-                        );
-         */
+        $parameters = array(); 
 
         $queryBuilder = GeneralUtility::makeInstance(ConnectionPool::class)->getQueryBuilderForTable('tx_hevsectioninfo_settlement');
         $rows = $queryBuilder
